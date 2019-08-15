@@ -6,13 +6,10 @@ import {Switch, Route} from 'react-router-dom'
 import NavLinkBar from '../navlink/navlink'
 import Mentor from '../mentor/mentor'
 import Mentee from '../mentee/mentee'
+import User from '../personal/personal'
 
 function Msg() {
     return <h2>Message List</h2>
-}
-
-function User() {
-    return <h2>Personal Center</h2>
 }
 
 @connect(
