@@ -1,5 +1,5 @@
 /*
-User login/signup logic
+User login/signup express logic
 */
 
 const express = require('express');
@@ -9,9 +9,10 @@ const db = require('./db')
 const User = db.getModel('user')
 
 router.get('/list', function(req, res) {
-    // User.remove({}, function(e, d){})
-    User.find({}, function(err, doc) {
-        return res.json(doc)
+    const {type} = req.query
+    //User.remove({type}, function(e, d){})
+    User.find({type}, function(err, doc) {
+        return res.json({code:0,data:doc})
     })
 })
 
@@ -24,11 +25,14 @@ router.post('/register', function(req, res) {
         if (doc) {
             return res.json({code:1, msg:'User name already exists'})
         }
-        User.create({user, pwd:md5Pwd(pwd), type}, function(e, d) {
+        const userModel = new User({user, type, pwd:md5Pwd(pwd)})
+        userModel.save(function(e, d) {
             if (e) {
                 return res.json({code: 1, msg:'Sorry, something is wrong with the server'})
             }
-            return res.json({code:0})
+            const {user, type, _id} = d
+            res.cookie('userid', _id)
+            return res.json({code:0, data:{user, type, _id}})
         })
     })
 })
@@ -42,8 +46,24 @@ router.post('/login', function(req, res) {
         if (!doc) {
             return res.json({code:1, msg:'Incorrect Username/Password'})
         } else {
+            res.cookie('userid', doc._id);
             return res.json({code:0, data:doc})
         }
+    })
+})
+
+router.post('/update', function(req, res) {
+    const userid = req.cookies.userid
+    if (!userid) {
+        return res.json({code:1});
+    }
+    const body = req.body
+    User.findByIdAndUpdate(userid, body, function(err,doc) {
+        const data = Object.assign({}, {
+            user:doc.user,
+            type:doc.type
+        }, body)
+        return res.json({code:0, data})
     })
 })
 
@@ -53,9 +73,20 @@ function md5Pwd(pwd) {
     return util.md5(key+pwd)
 }
 
+// if cookie is recognized stay logged in
 router.get('/info', function(req, res) {
-    // To Do: cookie verification
-    return res.json({code:1});
+    const {userid} = req.cookies
+    if (!userid) {
+        return res.json({code:1});
+    }
+    User.findOne({_id:userid}, {'pwd':0}, function(err, doc) {
+        if (err) {
+            return res.json({code:1, msg:'Sorry, something is wrong with the server'})
+        }
+        if (doc) {
+            return res.json({code:0, data:doc})
+        }
+    })
 })
 
 module.exports = router

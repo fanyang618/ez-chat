@@ -8,6 +8,9 @@ import reducers from './reducer'
 import './config'
 import Login from './container/login/login'
 import Signup from './container/signup/signup'
+import MentorInfo from './container/mentorinfo/mentorinfo'
+import MenteeInfo from './container/menteeinfo/menteeinfo'
+import Dashboard from './component/Dashboard/dashboard'
 import AuthRoute from './component/authroute/authroute'
 
 import './index.css';
@@ -19,22 +22,17 @@ const store = createStore(reducers, compose(
     window.devToolsExtension?window.devToolsExtension():f=>f
 ))
 
-function Mentor() {
-    return <h2>Mentor Page</h2>
-}
-
-function Mentee() {
-    return <h2>Mentee Page</h2>
-}
-
 ReactDOM.render(
     (<Provider store={store}>
         <BrowserRouter>
             <AuthRoute></AuthRoute>
-            <Route path = '/mentor' component={Mentor}></Route>
-            <Route path = '/mentee' component={Mentee}></Route>
-            <Route path = '/login' component={Login}></Route>
-            <Route path = '/signup' component={Signup}></Route>
+            <Switch>
+                <Route path = '/mentorinfo' component={MentorInfo}></Route>
+                <Route path = '/menteeinfo' component={MenteeInfo}></Route>
+                <Route path = '/login' component={Login}></Route>
+                <Route path = '/signup' component={Signup}></Route>
+                <Route component={Dashboard}></Route>
+            </Switch>
         </BrowserRouter>
     </Provider>)
     ,document.getElementById('root')

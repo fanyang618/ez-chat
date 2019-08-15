@@ -13,10 +13,11 @@ const dbs = {
         'type':{'type':String, 'require':true},
         'avatar':{'type':String},
         // Personal intro
-        'about':{'type':String},
+        'desc':{'type':String},
         // Job Title
         'title':{'type':String},
-        'company':{'type':String}
+        'company':{'type':String},
+        'pos':{'type':String}
     },
     chat:{
     }
