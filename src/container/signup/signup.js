@@ -7,36 +7,30 @@ import { List, InputItem, WingBlank, WhiteSpace, Button, Radio } from 'antd-mobi
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { register } from '../../redux/user.redux'
+import Form from '../../component/form-wrapper/form'
 
 @connect(
     state=>state.user,
     {register}
 )
+@Form
 class Signup extends React.Component {
     constructor(props) {
         super(props);
         this.handleRegister = this.handleRegister.bind(this);
         this.login = this.login.bind(this);
-        this.state = {
-            user:'',
-            pwd:'',
-            repeat_pwd:'',
-            type:'mentor'
-        }
+    }
+
+    componentDidMount() {
+        this.props.handleChange('type', "mentor")
     }
 
     handleRegister() {
-        this.props.register(this.state);
+        this.props.register(this.props.state);
     }
 
     login(){
         this.props.history.push('/login');
-    }
-
-    handleChange(key, val) {
-        this.setState({
-            [key]:val
-        })
     }
 
     render() {
@@ -47,14 +41,14 @@ class Signup extends React.Component {
                 <Logo></Logo>
                 <h2>Signup Page</h2>
                 <List>
-                    <InputItem onChange={v=>this.handleChange('user',v)}>User Name</InputItem>
-                    <InputItem type='password' onChange={v=>this.handleChange('pwd',v)}>Password</InputItem>
-                    <InputItem type='password' labelNumber={10} onChange={v=>this.handleChange('repeat_pwd',v)}>Comfirm Password</InputItem>
+                    <InputItem onChange={v=>this.props.handleChange('user',v)}>User Name</InputItem>
+                    <InputItem type='password' onChange={v=>this.props.handleChange('pwd',v)}>Password</InputItem>
+                    <InputItem type='password' labelNumber={10} onChange={v=>this.props.handleChange('repeat_pwd',v)}>Comfirm Password</InputItem>
                     <WhiteSpace/>
                     
                     <WhiteSpace/>
-                    <RadioItem onChange={v=>this.handleChange('type','mentor')} checked={this.state.type==='mentor'}>I want to help - Be a Mentor</RadioItem>
-                    <RadioItem onChange={v=>this.handleChange('type','mentee')} checked={this.state.type==='mentee'}>I need help - Be a Mentee</RadioItem>
+                    <RadioItem onChange={v=>this.props.handleChange('type','mentor')} checked={this.props.state.type==='mentor'}>I want to help - Be a Mentor</RadioItem>
+                    <RadioItem onChange={v=>this.props.handleChange('type','mentee')} checked={this.props.state.type==='mentee'}>I need help - Be a Mentee</RadioItem>
                 </List>
                 <WhiteSpace/>
                 <WingBlank>
