@@ -1,18 +1,18 @@
 /*
 User login/signup express logic
 */
-
 const express = require('express');
 const util = require('utility')
 const router = express.Router();
 const db = require('./db')
 const User = db.getModel('user')
 
+// return user lists according to type
 router.get('/list', function(req, res) {
     const {type} = req.query
     //User.remove({type}, function(e, d){})
     User.find({type}, function(err, doc) {
-        return res.json({code:0,data:doc})
+        return res.json({code:0, data:doc})
     })
 })
 
@@ -52,6 +52,7 @@ router.post('/login', function(req, res) {
     })
 })
 
+// update personal info, return error code if userid does not exist
 router.post('/update', function(req, res) {
     const userid = req.cookies.userid
     if (!userid) {
