@@ -53,8 +53,8 @@ class Signup extends React.Component {
                     <WhiteSpace/>
                     
                     <WhiteSpace/>
-                    <RadioItem onChange={v=>this.handleChange('type','mentor')} checked={this.state.type=='mentor'}>I want to help - Be a Mentor</RadioItem>
-                    <RadioItem onChange={v=>this.handleChange('type','mentee')} checked={this.state.type=='mentee'}>I need help - Be a Mentee</RadioItem>
+                    <RadioItem onChange={v=>this.handleChange('type','mentor')} checked={this.state.type==='mentor'}>I want to help - Be a Mentor</RadioItem>
+                    <RadioItem onChange={v=>this.handleChange('type','mentee')} checked={this.state.type==='mentee'}>I need help - Be a Mentee</RadioItem>
                 </List>
                 <WhiteSpace/>
                 <WingBlank>

@@ -5,6 +5,7 @@ import { userInfo } from "os";
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
 const LOAD_DATA = 'LOAD_DATA'
 const ERROR_MSG = 'ERROR_MSG'
+const LOGOUT = 'LOGOUT'
 
 const initState = {
     redirectTo:'',
@@ -18,6 +19,8 @@ export function user(state=initState, action) {
     switch(action.type) {
         case AUTH_SUCCESS:
             return {...state, msg:'', redirectTo:getRedirectPath(action.payload), ...action.payload}
+        case LOGOUT:
+            return {...initState, redirectTo:'/login'}
         case LOAD_DATA:
                 return {...state, ...action.payload}
         case ERROR_MSG:
@@ -45,12 +48,12 @@ export function register({user, pwd, repeat_pwd, type}) {
     } else if (!pwd) {
         return errorMsg('Password is required');
     }
-    if (pwd != repeat_pwd) {
+    if (pwd !== repeat_pwd) {
         return errorMsg('Confirm password is different from the password')
     }
     return dispatch=> {
         axios.post('user/register', {user, pwd, type}).then(res=>{
-            if (res.status == 200 && res.data.code == 0) {
+            if (res.status === 200 && res.data.code === 0) {
                 dispatch(authSuccess({user,pwd,type}));
             } else {
                 dispatch(errorMsg(res.data.msg));
@@ -66,7 +69,7 @@ export function login({user, pwd}) {
     }
     return dispatch=> {
         axios.post('user/login', {user, pwd}).then(res=>{
-            if (res.status == 200 && res.data.code == 0) {
+            if (res.status === 200 && res.data.code === 0) {
                 dispatch(authSuccess(res.data.data));
             } else {
                 dispatch(errorMsg(res.data.msg));
@@ -75,11 +78,15 @@ export function login({user, pwd}) {
     }
 }
 
+export function logoutSubmit() {
+    return {type:LOGOUT}
+}
+
 // update user information
 export function update(data) {
     return dispatch=> {
         axios.post('/user/update',data).then(res=>{
-            if (res.status == 200 && res.data.code == 0) {
+            if (res.status === 200 && res.data.code === 0) {
                 dispatch(authSuccess(res.data.data));
             } else {
                 dispatch(errorMsg(res.data.msg));

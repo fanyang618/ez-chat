@@ -18,12 +18,6 @@ code {
   width:100%;
 }
 
-.am-tab-bar{
-  position:fixed;
-  bottom:0;
-  width:100%;
-}
-
 .error_msg {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 5mm;

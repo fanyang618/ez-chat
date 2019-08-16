@@ -1,6 +1,5 @@
 import React from 'react'
 import { NavBar} from 'antd-mobile';
-import { user } from '../../redux/user.redux';
 import { connect } from 'react-redux'
 import {Switch, Route} from 'react-router-dom'
 import NavLinkBar from '../navlink/navlink'
@@ -25,7 +24,7 @@ class Dashboard extends React.Component {
                 icon:'boss',
                 title:'Mentee List',
                 component:Mentor,
-                hide:user.type=='mentee'
+                hide:user.type==='mentee'
             },
             {
                 path:'/mentee',
@@ -33,7 +32,7 @@ class Dashboard extends React.Component {
                 icon:'job',
                 title:'Mentor List',
                 component:Mentee,
-                hide:user.type=='mentor'
+                hide:user.type==='mentor'
             },
             {
                 path:'/msg',
@@ -53,7 +52,7 @@ class Dashboard extends React.Component {
         const {pathname} = this.props.location
         return (
             <div>
-                <NavBar className='fixd-header' mode='dark'>{navList.find(v=>v.path==pathname).title}</NavBar>
+                <NavBar className='fixd-header' mode='dark'>{navList.find(v=>v.path===pathname).title}</NavBar>
                 <div style={{marginTop:45}}>
 						<Switch>
 							{navList.map(v=>(

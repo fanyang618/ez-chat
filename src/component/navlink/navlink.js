@@ -12,19 +12,19 @@ class NavLinkBar extends React.Component {
         const {pathname} = this.props.location
         const navList = this.props.data.filter(v=>!v.hide)
         return (
-            <div>
-            <TabBar>
-                {navList.map(v=>(
-                    <TabBar.Item key={v.path} title={v.text} 
-                    icon={{uri: require(`./img/${v.icon}.png`)}}
-                    selectedIcon = {{uri: require(`./img/${v.icon}-active.png`)}}
-                    selected={pathname===v.path}
-                    onPress={()=>{
-                        this.props.history.push(v.path)
-                    }}>
-                    </TabBar.Item>    
-                ))}
-            </TabBar>
+            <div style={{position:'fixed', width:'100%', bottom:0}}>
+                <TabBar>
+                    {navList.map(v=>(
+                        <TabBar.Item key={v.path} title={v.text} 
+                        icon={{uri: require(`./img/${v.icon}.png`)}}
+                        selectedIcon = {{uri: require(`./img/${v.icon}-active.png`)}}
+                        selected={pathname===v.path}
+                        onPress={()=>{
+                            this.props.history.push(v.path)
+                        }}>
+                        </TabBar.Item>    
+                    ))}
+                </TabBar>
             </div>
         )
     }

@@ -19,7 +19,7 @@ class UserCard extends React.Component {
                             extra={<span>{v.title}</span>}>
                         </Card.Header>
                         <Card.Body>
-                            {v.type=='mentor'?<div>Company: {v.company}</div>:null}
+                            {v.type==='mentor'?<div>Company: {v.company}</div>:null}
                             <WhiteSpace></WhiteSpace>
                             {v.desc.split('\n').map(d=>(
                                 <div key={d}>{d}</div>
