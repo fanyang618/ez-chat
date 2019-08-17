@@ -10,6 +10,7 @@ import Login from './container/login/login'
 import Signup from './container/signup/signup'
 import MentorInfo from './container/mentorinfo/mentorinfo'
 import MenteeInfo from './container/menteeinfo/menteeinfo'
+import Chat from './component/chat/chat'
 import Dashboard from './component/Dashboard/dashboard'
 import AuthRoute from './component/authroute/authroute'
 
@@ -31,6 +32,7 @@ ReactDOM.render(
                 <Route path = '/menteeinfo' component={MenteeInfo}></Route>
                 <Route path = '/login' component={Login}></Route>
                 <Route path = '/signup' component={Signup}></Route>
+                <Route path = '/chat/:user' component={Chat}></Route>
                 <Route component={Dashboard}></Route>
             </Switch>
         </BrowserRouter>
