@@ -20,6 +20,12 @@ const dbs = {
         'pos':{'type':String}
     },
     chat:{
+        'chatid':{'type':String, 'require':true}, // chatroom id
+        'from':{'type':String, 'require':true},
+        'to':{'type':String, 'require':true},
+        'read':{'type':Boolean, 'default':false},
+        'content':{'type':String, 'require':true,default:''},
+        'msg_time':{'type':Number,'default':new Date().getTime()}
     }
 }
 
