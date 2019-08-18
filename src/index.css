@@ -27,6 +27,10 @@ code {
   margin-bottom: 0px;
 }
 
+.page-content {
+  padding: 45px 5px;
+}
+
 #chat-page .chat-ma .am-list-extra {
   flex-basis: auto
 }
@@ -37,7 +41,7 @@ code {
 }
 
 .stick-footer {
-  position: fixed;
+  position: absolute;
   z-index: 10;
   bottom:0;
   width:100%;

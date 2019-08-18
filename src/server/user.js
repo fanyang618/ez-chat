@@ -69,9 +69,10 @@ router.post('/update', function(req, res) {
     })
 })
 
-router.get('getmsglist', function(req, res) {
+router.get('/getmsglist', function(req, res) {
     const user = req.cookies.user
-    CharacterData.find({'$or':[{from:user, to:user}]}, function(err, doc) {
+    //'$or':[{from:user, to:user}]
+    Chat.find({}, function(err, doc) {
         if (!err) {
             return res.json({code:0, msgs:doc})
         }
