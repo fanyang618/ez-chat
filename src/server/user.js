@@ -6,6 +6,7 @@ const util = require('utility')
 const router = express.Router();
 const db = require('./db')
 const User = db.getModel('user')
+const Chat = db.getModel('chat')
 
 // return user lists according to type
 router.get('/list', function(req, res) {
@@ -65,6 +66,15 @@ router.post('/update', function(req, res) {
             type:doc.type
         }, body)
         return res.json({code:0, data})
+    })
+})
+
+router.get('getmsglist', function(req, res) {
+    const user = req.cookies.user
+    CharacterData.find({'$or':[{from:user, to:user}]}, function(err, doc) {
+        if (!err) {
+            return res.json({code:0, msgs:doc})
+        }
     })
 })
 
