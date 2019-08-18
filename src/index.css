@@ -31,11 +31,11 @@ code {
   padding: 45px 5px;
 }
 
-#chat-page .chat-ma .am-list-extra {
+#chat-page .chat-me .am-list-extra {
   flex-basis: auto
 }
 
-#chat-page .chat-ma .am-list-content {
+#chat-page .chat-me .am-list-content {
   padding-right: 15px;
   text-align: right;
 }
