@@ -3,6 +3,7 @@ import {List, InputItem, NavBar, Icon} from 'antd-mobile'
 import io from 'socket.io-client'
 import {connect} from 'react-redux'
 import {getMsgList, sendMsg, recvMsg} from '../../redux/chat.redux'
+import { getChatId } from '../../util';
 
 const socket = io('ws://localhost:9093')
 
@@ -36,10 +37,13 @@ class Chat extends React.Component {
         const userid = this.props.match.params.user
         const Item = List.Item
         const users = this.props.chat.users
-        //console.log(this.props)
+        
         if (!users[userid]) {
             return null
         }
+        const chatId = getChatId(userid, this.props.user._id)
+        console.log(chatId)
+        const chatmsgs = this.props.chat.chatmsg.filter(v=>v.chatid===chatId)
         return (
             <div>
                 <div id='chat-page'>
@@ -50,7 +54,7 @@ class Chat extends React.Component {
                     }}>
                         {users[userid].name}
                     </NavBar>
-                    {this.props.chat.chatmsg.map(v=>{
+                    {chatmsgs.map(v=>{
                         const avatar = require(`../avatar-selector/avatar/${users[v.from].avatar}.png`)
                         return v.from===userid?(
                                 <List key={v._id}>
