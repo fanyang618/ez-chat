@@ -34,7 +34,8 @@ class Chat extends React.Component {
         const userid = this.props.match.params.user
         const Item = List.Item
         const users = this.props.chat.users
-        
+        const emoji = '😀 😃 '
+
         if (!users[userid]) {
             return null
         }

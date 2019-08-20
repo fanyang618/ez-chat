@@ -4,6 +4,7 @@
 import React from 'react';
 import Logo from '../../component/logo/logo.js';
 import { login } from '../../redux/user.redux'
+import { getMsgList } from '../../redux/chat.redux'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Form from '../../component/form-wrapper/form'
@@ -11,7 +12,7 @@ import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile';
 
 @connect(
     state=>state.user,
-    {login}
+    {login, getMsgList}
 )
 @Form
 class Login extends React.Component {
@@ -30,6 +31,7 @@ class Login extends React.Component {
     }
 
     render() {
+        //
         return (
             <div>
                 {this.props.redirectTo && this.props.redirectTo!=='/login'?<Redirect to={this.props.redirectTo}/>:null}

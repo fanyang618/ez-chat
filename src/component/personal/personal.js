@@ -4,11 +4,12 @@ import {Result, List, WhiteSpace, Button, Modal} from 'antd-mobile'
 import {Brief} from 'antd-mobile/lib/list/ListItem'
 import browserCookie from 'browser-cookies'
 import {logoutSubmit} from '../../redux/user.redux'
+import {clearChatLog} from '../../redux/chat.redux'
 import {Redirect} from 'react-router-dom'
 
 @connect(
     state=>state.user,
-    {logoutSubmit}
+    {logoutSubmit, clearChatLog}
 )
 class User extends React.Component {
     constructor(props) {
@@ -22,8 +23,9 @@ class User extends React.Component {
 		alert('Log Out', 'Confirm Log Out?', [
 		      { text: 'Cancel', onPress: () => console.log('cancel') },
 		      { text: 'Confirm', onPress: () => {
-		      	browserCookie.erase('userid')
-		      	this.props.logoutSubmit()
+                  browserCookie.erase('userid')
+                  //this.props.clearChatLog()
+                  this.props.logoutSubmit()
 		      }}
 		    ])
     }

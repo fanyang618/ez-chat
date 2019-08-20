@@ -6,11 +6,8 @@ import NavLinkBar from '../navlink/navlink'
 import Mentor from '../mentor/mentor'
 import Mentee from '../mentee/mentee'
 import User from '../personal/personal'
+import Msg from '../msg/msg'
 import {getMsgList, recvMsg} from '../../redux/chat.redux'
-
-function Msg() {
-    return <h2>Message List</h2>
-}
 
 @connect(
     state=>state,

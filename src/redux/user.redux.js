@@ -1,6 +1,5 @@
 import axios from "axios";
 import {getRedirectPath} from '../util'
-import { userInfo } from "os";
 
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
 const LOAD_DATA = 'LOAD_DATA'
@@ -17,10 +16,10 @@ const initState = {
 // reducer
 export function user(state=initState, action) {
     switch(action.type) {
-        case AUTH_SUCCESS:
-            return {...state, msg:'', redirectTo:getRedirectPath(action.payload), ...action.payload}
         case LOGOUT:
             return {...initState, redirectTo:'/login'}
+        case AUTH_SUCCESS:
+            return {...state, msg:'', redirectTo:getRedirectPath(action.payload), ...action.payload}
         case LOAD_DATA:
                 return {...state, ...action.payload}
         case ERROR_MSG:
