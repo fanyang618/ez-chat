@@ -45,7 +45,7 @@ class Signup extends React.Component {
                     <InputItem type='password' onChange={v=>this.props.handleChange('pwd',v)}>Password</InputItem>
                     <InputItem type='password' labelNumber={10} onChange={v=>this.props.handleChange('repeat_pwd',v)}>Comfirm Password</InputItem>
                     <WhiteSpace/>
-                    
+                    {this.props.msg? <p className='error_msg'>{ this.props.msg }</p>:null}
                     <WhiteSpace/>
                     <RadioItem onChange={v=>this.props.handleChange('type','mentor')} checked={this.props.state.type==='mentor'}>I want to help - Be a Mentor</RadioItem>
                     <RadioItem onChange={v=>this.props.handleChange('type','mentee')} checked={this.props.state.type==='mentee'}>I need help - Be a Mentee</RadioItem>

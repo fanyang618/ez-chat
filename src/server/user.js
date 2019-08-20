@@ -10,6 +10,7 @@ const Chat = db.getModel('chat')
 
 // return user lists according to type
 router.get('/list', function(req, res) {
+    //Chat.remove({}, function(e, d){})
     const {type} = req.query
     //User.remove({type}, function(e, d){})
     User.find({type}, function(err, doc) {

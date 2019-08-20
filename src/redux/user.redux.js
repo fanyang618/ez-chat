@@ -11,7 +11,7 @@ const initState = {
     redirectTo:'',
     msg:'',
     userid:'',
-    type:''
+    type:'',
 }
 
 // reducer

@@ -5,8 +5,6 @@ import {connect} from 'react-redux'
 import {getMsgList, sendMsg, recvMsg} from '../../redux/chat.redux'
 import { getChatId } from '../../util';
 
-const socket = io('ws://localhost:9093')
-
 @connect(
     state=>state,
     {getMsgList, sendMsg,recvMsg}
@@ -25,7 +23,6 @@ class Chat extends React.Component {
     }
 
     handleSubmit () {
-        //socket.emit('sendmsg',{text: this.state.text})
         const from = this.props.user._id
         const to = this.props.match.params.user
         const msg = this.state.text
@@ -42,7 +39,7 @@ class Chat extends React.Component {
             return null
         }
         const chatId = getChatId(userid, this.props.user._id)
-        console.log(chatId)
+        //console.log(chatId)
         const chatmsgs = this.props.chat.chatmsg.filter(v=>v.chatid===chatId)
         return (
             <div>
